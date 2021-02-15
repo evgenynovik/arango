@@ -19,6 +19,6 @@ public class ArangoConfiguration extends AbstractArangoConfiguration {
 
     @Override
     public String database() {
-        return "spring-demo";
+        return "network_elements";
     }
 }

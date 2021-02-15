@@ -18,7 +18,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 @SpringBootApplication(scanBasePackages = "com.javaperformer")
 public class ArangoProject {
 //    static class MyConfiguration implements ArangoConfiguration{
-//
 //    }
     public static void main(String[] args) {
 //        SpringApplication.run(ArangoProject.class, args);
@@ -37,7 +36,6 @@ public class ArangoProject {
 //        } catch (ArangoDBException e) {
 //            System.err.println("Failed to create database: " + dbName + "; " + e.getMessage());
 //        }
-//
 //        String collectionName = "firstCollection";
 //        try {
 //            CollectionEntity myArangoCollection = arangoDB.db(dbName).createCollection(collectionName);
@@ -45,7 +43,6 @@ public class ArangoProject {
 //        } catch (ArangoDBException e) {
 //            System.err.println("Failed to create collection: " + collectionName + "; " + e.getMessage());
 //        }
-//
 //        BaseDocument myObject = new BaseDocument();
 //        myObject.setKey("myKey");
 //        myObject.addAttribute("a", "Foo");
@@ -56,7 +53,6 @@ public class ArangoProject {
 //        } catch (ArangoDBException e) {
 //            System.err.println("Failed to create document. " + e.getMessage());
 //        }
-
 //        try {
 //            BaseDocument myDocument = arangoDB.db(dbName).collection(collectionName).getDocument("myKey",
 //                    BaseDocument.class);
