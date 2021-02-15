@@ -1,0 +1,3 @@
+logging:
+  level:
+    com.javaperformer: ${LOG_LEVEL:INFO}
