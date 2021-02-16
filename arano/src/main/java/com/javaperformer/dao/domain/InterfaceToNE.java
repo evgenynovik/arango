@@ -1,6 +1,8 @@
 package com.javaperformer.dao.domain;
 
-import com.arangodb.springframework.annotation.*;
+import com.arangodb.springframework.annotation.Edge;
+import com.arangodb.springframework.annotation.From;
+import com.arangodb.springframework.annotation.To;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,18 +11,15 @@ import org.springframework.data.annotation.Id;
 
 @Builder
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Document("interfaces")
-public class Interface {
+@NoArgsConstructor
+@Edge("interfacesToNE")
+public class InterfaceToNE {
 
     @Id
     private String id;
-    private String mkey;
-    private String name;
-    private String parent_mkey;
-    private String type;
-    private boolean state;
-    @Relations(edges = InterfaceToNE.class, lazy = true)
+    @From
+    private Interface interFace;
+    @To
     private NetworkElement networkElement;
 }
