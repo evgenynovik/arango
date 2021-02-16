@@ -27,5 +27,5 @@ public class Interface {
     private NetworkElement networkElement;
 
     @Relations(edges = InterfaceToNE.class, lazy = true)
-    private List<Interface> interFace;
+    private List<Interface> interFaces;
 }
