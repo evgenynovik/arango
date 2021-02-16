@@ -19,6 +19,6 @@ public class NetworkElement {
     private String mkey;
     private String name;
     private LocalDate date;
-    @Relations(edges = Interface.class, lazy = true)
-    private List<NetworkElement> childs;
+    @Relations(edges = InterfaceToNE.class, lazy = true)
+    private List<Interface> interfaces;
 }
