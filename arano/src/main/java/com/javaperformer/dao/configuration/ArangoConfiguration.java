@@ -9,12 +9,13 @@ import com.arangodb.ArangoDB.Builder;
 @Configuration
 @EnableArangoRepositories(basePackages = { "com.javaperformer.dao" })
 public class ArangoConfiguration extends AbstractArangoConfiguration {
+
     @Override
     public Builder arango() {
         return new ArangoDB.Builder()
                 .host("192.168.99.100", 8529)
-                .user("root")
-                .password("password");
+                .password("password")
+                .user("root");
     }
 
     @Override

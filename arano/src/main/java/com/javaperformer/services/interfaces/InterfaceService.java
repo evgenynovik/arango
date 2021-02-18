@@ -1,7 +1,8 @@
 package com.javaperformer.services.interfaces;
 
 import com.javaperformer.dao.domain.Interface;
+import com.javaperformer.services.dto.InterfaceDTO;
 
 public interface InterfaceService {
-    Interface create(Interface interFace);
+    InterfaceDTO create(InterfaceDTO interFaceDTO);
 }

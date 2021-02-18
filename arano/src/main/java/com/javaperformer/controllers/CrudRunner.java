@@ -6,6 +6,7 @@ import com.javaperformer.dao.interfaces.InterfaceToInterfaceRepository;
 import com.javaperformer.dao.interfaces.InterfaceToNERepository;
 import com.javaperformer.dao.interfaces.InterfacesRepository;
 import com.javaperformer.dao.interfaces.NetworkElementRepository;
+import com.javaperformer.services.dto.InterfaceDTO;
 import com.javaperformer.services.interfaces.InterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,13 +48,13 @@ public class CrudRunner {
                 .mkey(UUID.randomUUID().toString())
                 .name("Herold")
                 .type(Type.LOGICAL.name()).build();
-        final Interface firstInterFace = Interface.builder()
+        final InterfaceDTO firstInterFace = InterfaceDTO.builder()
                 .mkey(UUID.randomUUID().toString())
-                .name("John")
-                .interFaces(Collections.singletonList(secondInterFace))
-                .type(Type.PHYSICAL.name()).build();
+                .name("Johnnoo")
+                .state(true)
+                .type(Type.LOGICAL.name()).build();
 
-        networkElementRepository.save(element);
+//        networkElementRepository.save(element);
 //        interfacesRepository.save(firstInterFace);
 //        interfacesRepository.save(secondInterFace);
 //        interfaceToNERepository.save(InterfaceToNE.builder()

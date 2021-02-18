@@ -1,3 +1,9 @@
 logging:
   level:
     com.javaperformer: ${LOG_LEVEL:INFO}
+#spring:
+#  data:
+#    arangodb:
+#      hosts: 192.168.99.100:8529
+#      password: password
+#      user: root
