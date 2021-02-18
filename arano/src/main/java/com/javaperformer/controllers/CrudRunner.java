@@ -50,7 +50,7 @@ public class CrudRunner {
                 .type(Type.LOGICAL.name()).build();
         final InterfaceDTO firstInterFace = InterfaceDTO.builder()
                 .mkey(UUID.randomUUID().toString())
-                .name("Johnnoo")
+                .name("Juno")
                 .state(true)
                 .type(Type.LOGICAL.name()).build();
 

@@ -1,6 +1,8 @@
 package com.javaperformer.services.converters;
 
-public interface Converter<T, Y> {
+import com.javaperformer.dao.domain.BaseEntity;
+
+public interface Converter<T extends BaseEntity, Y> {
     Y convertToDTO(T entity);
 
     T convertToEntity(Y dto);

@@ -1,25 +1,16 @@
 package com.javaperformer.dao.domain;
 
 import com.arangodb.springframework.annotation.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
+import lombok.*;
 
 import java.util.List;
 
-@Builder
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Document("interfaces")
-public class Interface {
+public class Interface extends BaseEntity {
 
-    @Id
-    private String id;
-    private String mkey;
-    private String name;
     private String parent_mkey;
     private String type;
     private boolean state;
@@ -28,4 +19,15 @@ public class Interface {
 
     @Relations(edges = InterfaceToNE.class, lazy = true)
     private List<Interface> interFaces;
+
+    @Builder
+    public Interface(String id, String mkey, String name, String parent_mkey, String type, boolean state,
+                     NetworkElement networkElement, List<Interface> interFaces) {
+        super(id, mkey, name);
+        this.parent_mkey = parent_mkey;
+        this.type = type;
+        this.state = state;
+        this.networkElement = networkElement;
+        this.interFaces = interFaces;
+    }
 }
