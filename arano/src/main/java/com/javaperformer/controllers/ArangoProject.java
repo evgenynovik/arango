@@ -7,8 +7,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 @SpringBootApplication(scanBasePackages = "com.javaperformer")
 public class ArangoProject {
     public static void main(String[] args) {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(ArangoProject.class);
-        CrudRunner starter = ctx.getBean(CrudRunner.class);
+        CrudRunner starter = new AnnotationConfigApplicationContext(ArangoProject.class).getBean(CrudRunner.class);
+//        CrudRunner starter = ctx.getBean(CrudRunner.class);
         starter.perform();
     }
 }

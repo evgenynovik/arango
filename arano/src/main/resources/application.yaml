@@ -1,9 +1,17 @@
-logging:
-  level:
-    com.javaperformer: ${LOG_LEVEL:INFO}
+#logging:
+#  level:
+#    com.javaperformer: ${LOG_LEVEL:INFO}
 #spring:
 #  data:
 #    arangodb:
 #      hosts: 192.168.99.100:8529
-#      password: password
+#      database: network_elements
 #      user: root
+#      password: password
+
+arango:
+  host: ${arango_host}
+  port: ${arango_port}
+  password: ${arango_password}
+  user: ${arango_user}
+  database: ${arango_database}
