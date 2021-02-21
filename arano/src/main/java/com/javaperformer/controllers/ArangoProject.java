@@ -1,14 +1,14 @@
 package com.javaperformer.controllers;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+@Slf4j
 @SpringBootApplication(scanBasePackages = "com.javaperformer")
 public class ArangoProject {
     public static void main(String[] args) {
-        CrudRunner starter = new AnnotationConfigApplicationContext(ArangoProject.class).getBean(CrudRunner.class);
-//        CrudRunner starter = ctx.getBean(CrudRunner.class);
-        starter.perform();
+        SpringApplication.run(ArangoProject.class, args);
+        log.info(" Application is launched.");
     }
 }

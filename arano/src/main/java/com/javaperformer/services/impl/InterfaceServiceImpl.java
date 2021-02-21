@@ -1,5 +1,6 @@
 package com.javaperformer.services.impl;
 
+import com.javaperformer.controllers.LogicException;
 import com.javaperformer.dao.domain.*;
 import com.javaperformer.dao.interfaces.InterfaceToInterfaceRepository;
 import com.javaperformer.dao.interfaces.InterfaceToNERepository;
@@ -11,6 +12,7 @@ import com.javaperformer.services.interfaces.InterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.LoginException;
 import java.util.List;
 import java.util.Optional;
 
