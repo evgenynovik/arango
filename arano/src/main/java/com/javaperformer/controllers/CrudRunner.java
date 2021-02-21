@@ -38,19 +38,21 @@ public class CrudRunner {
     }
 
     public void perform() {
-        operations.dropDatabase();
+//        operations.dropDatabase();
         final NetworkElement element = NetworkElement.builder()
                 .mkey(UUID.randomUUID().toString())
                 .name("Ronald")
                 .date(LocalDate.now()).build();
 
-        final Interface secondInterFace = Interface.builder()
+        final InterfaceDTO secondInterFace = InterfaceDTO.builder()
                 .mkey(UUID.randomUUID().toString())
                 .name("Herold")
-                .type(Type.LOGICAL.name()).build();
+                .parent_mkey("3d12ce3b-cfa1-4cbb-91f2-7a323110cf0a")
+                .type(Type.PHYSICAL.name()).build();
         final InterfaceDTO firstInterFace = InterfaceDTO.builder()
                 .mkey(UUID.randomUUID().toString())
-                .name("Juno")
+                .parent_mkey("8b4015ec-c0c2-4067-80f7-5911eb041d41")
+                .name("Gimli")
                 .state(true)
                 .type(Type.LOGICAL.name()).build();
 
@@ -64,6 +66,6 @@ public class CrudRunner {
 //                .logicalInterFace(secondInterFace)
 //                .physicalInterFace(firstInterFace).build());
 
-        interfaceService.create(firstInterFace);
+        interfaceService.delete("37573");
     }
 }

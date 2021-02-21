@@ -5,4 +5,5 @@ import com.javaperformer.services.dto.InterfaceDTO;
 
 public interface InterfaceService {
     InterfaceDTO create(InterfaceDTO interFaceDTO);
+    void delete(String id);
 }
