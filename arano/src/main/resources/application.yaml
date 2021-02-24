@@ -15,3 +15,6 @@ arango:
   password: ${arango_password}
   user: ${arango_user}
   database: ${arango_database}
+
+server:
+  port: 8080

@@ -9,6 +9,7 @@ import com.javaperformer.dao.interfaces.NetworkElementRepository;
 import com.javaperformer.services.converters.Converter;
 import com.javaperformer.services.dto.InterfaceDTO;
 import com.javaperformer.services.interfaces.InterfaceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import javax.security.auth.login.LoginException;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class InterfaceServiceImpl implements InterfaceService {
     private final InterfaceToNERepository interfaceToNERepository;
@@ -39,6 +41,7 @@ public class InterfaceServiceImpl implements InterfaceService {
 
     @Override
     public InterfaceDTO create(InterfaceDTO interFaceDTO) {
+        log.info("CREATED");
         Interface interFace = converter.convertToEntity(interFaceDTO);
         if (interFace.getType().equals(Type.PHYSICAL.name())) {
             Interface logicalFace = null;
@@ -61,6 +64,7 @@ public class InterfaceServiceImpl implements InterfaceService {
                 return converter.convertToDTO(savedInterface);
             }
         }
+        log.info("CREATED");
         return converter.convertToDTO(interFace);
     }
 
