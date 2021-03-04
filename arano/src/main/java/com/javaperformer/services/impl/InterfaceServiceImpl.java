@@ -13,9 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.login.LoginException;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -41,31 +46,34 @@ public class InterfaceServiceImpl implements InterfaceService {
 
     @Override
     public InterfaceDTO create(InterfaceDTO interFaceDTO) {
-        log.info("CREATED");
-        Interface interFace = converter.convertToEntity(interFaceDTO);
-        if (interFace.getType().equals(Type.PHYSICAL.name())) {
-            Interface logicalFace = null;
-            Optional<NetworkElement> optionalNetworkElement =
-                    networkElementRepository.findByMkey(interFace.getParent_mkey());
-            logicalFace = interfacesRepository.save(interFace);
-            if (optionalNetworkElement.isPresent()) {
-                interfaceToNERepository.save(InterfaceToNE.builder()
-                        .interFace(logicalFace)
-                        .networkElement(optionalNetworkElement.get()).build());
+        if (validate(interFaceDTO)) {
+            Interface interFace = converter.convertToEntity(interFaceDTO);
+            if (interFace.getType().equals(Type.PHYSICAL.name())) {
+                Interface logicalFace = null;
+                Optional<NetworkElement> optionalNetworkElement =
+                        networkElementRepository.findByMkey(interFace.getParent_mkey());
+                logicalFace = interfacesRepository.save(interFace);
+                if (optionalNetworkElement.isPresent()) {
+                    interfaceToNERepository.save(InterfaceToNE.builder()
+                            .interFace(logicalFace)
+                            .networkElement(optionalNetworkElement.get()).build());
+                }
+                return converter.convertToDTO(logicalFace);
+            } else if (interFace.getType().equals(Type.LOGICAL.name())) {
+                Interface savedInterface = interfacesRepository.save(interFace);
+                Optional<Interface> optionalInterface = interfacesRepository.findByMkey(interFace.getParent_mkey());
+                if (optionalInterface.isPresent()) {
+                    interfaceToInterfaceRepository.save(InterfaceToInterface.builder()
+                            .physicalInterFace(optionalInterface.get())
+                            .logicalInterFace(interFace).build());
+                    return converter.convertToDTO(savedInterface);
+                }
             }
-            return converter.convertToDTO(logicalFace);
-        } else if (interFace.getType().equals(Type.LOGICAL.name())) {
-            Interface savedInterface = interfacesRepository.save(interFace);
-            Optional<Interface> optionalInterface = interfacesRepository.findByMkey(interFace.getParent_mkey());
-            if (optionalInterface.isPresent()) {
-                interfaceToInterfaceRepository.save(InterfaceToInterface.builder()
-                        .physicalInterFace(optionalInterface.get())
-                        .logicalInterFace(interFace).build());
-                return converter.convertToDTO(savedInterface);
-            }
+            log.info("CREATED");
+            return converter.convertToDTO(interFace);
+        } else {
+            throw new LogicException("dggf");
         }
-        log.info("CREATED");
-        return converter.convertToDTO(interFace);
     }
 
     public void delete(String id) {
@@ -81,6 +89,18 @@ public class InterfaceServiceImpl implements InterfaceService {
                 interfaceToNE.ifPresent(interfaceToNERepository::delete);
                 interfacesRepository.delete(interFace);
             }
+        }
+    }
+
+    private static boolean validate(InterfaceDTO interfaceDTO) {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<InterfaceDTO>> violations = validator.validate(interfaceDTO);
+        if (violations.size() > 0) {
+            violations.forEach(violation -> log.info(violation.getMessage()));
+            return false;
+        } else {
+            return true;
         }
     }
 }

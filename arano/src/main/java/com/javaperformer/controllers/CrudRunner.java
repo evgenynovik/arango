@@ -1,7 +1,8 @@
 package com.javaperformer.controllers;
 
 import com.arangodb.springframework.core.ArangoOperations;
-import com.javaperformer.dao.domain.*;
+import com.javaperformer.dao.domain.NetworkElement;
+import com.javaperformer.dao.domain.Type;
 import com.javaperformer.dao.interfaces.InterfaceToInterfaceRepository;
 import com.javaperformer.dao.interfaces.InterfaceToNERepository;
 import com.javaperformer.dao.interfaces.InterfacesRepository;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.UUID;
 
 @Component
@@ -52,7 +52,7 @@ public class CrudRunner {
         final InterfaceDTO firstInterFace = InterfaceDTO.builder()
                 .mkey(UUID.randomUUID().toString())
                 .parent_mkey("8b4015ec-c0c2-4067-80f7-5911eb041d41")
-                .name("Gimli")
+                .name("Fr")
                 .state(true)
                 .type(Type.LOGICAL.name()).build();
 
@@ -66,6 +66,6 @@ public class CrudRunner {
 //                .logicalInterFace(secondInterFace)
 //                .physicalInterFace(firstInterFace).build());
 
-        interfaceService.delete("37573");
+        interfaceService.create(firstInterFace);
     }
 }
